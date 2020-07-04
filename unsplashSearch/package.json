@@ -1,0 +1,53 @@
+{
+	"name": "unsplash-search",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"start": "node node_modules/react-native/local-cli/cli.js start",
+		"start:clean": "node node_modules/react-native/local-cli/cli.js start --reset-cache",
+		"android:emulator": "emulator -avd default_R",
+		"build:android": "youi-tv build -p android",
+		"build:linux": "youi-tv build -p linux",
+		"run:linux": "./youi/build/linux/Debug/bin/unsplashSearch",
+		"clear:android": "cd youi/build/android/project && ./gradlew clean && cd ../../../..",
+		"clear:cache": "watchman watch-del-all",
+		"clear": "kill $(lsof -t -i:8081); yarn clear:android; yarn clear:cache",
+		"test": "jest"
+	},
+	"dependencies": {
+		"@youi/react-native-youi": "5.16.0",
+		"axios": "^0.19.2",
+		"react": "16.6.3",
+		"react-native": "0.58.6",
+		"react-native-dotenv": "^0.2.0",
+		"react-navigation": "2.18.3",
+		"styled-components": "4.1.3"
+	},
+	"devDependencies": {
+		"@babel/core": "7.0.0",
+		"babel-preset-env": "^1.7.0",
+		"babel-preset-react": "^6.24.1",
+		"babel-preset-react-native": "4.0.0",
+		"babel-register": "^6.26.0",
+		"jest": "^24.0.0",
+		"metro-react-native-babel-preset": "^0.45.0",
+		"react-test-renderer": "^16.6.3"
+	},
+	"jest": {
+		"preset": "@youi/react-native-youi",
+		"transform": {
+			"^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
+		},
+		"transformIgnorePatterns": [
+			"<rootDir>/node_modules/(?!(jest-)?react-native|@youi)"
+		],
+		"testPathIgnorePatterns": [
+			"/node_modules/",
+			"/appium/"
+		]
+	},
+	"youi": {
+		"entryFile": "index.youi.js",
+		"defaultBundleMode": "remote"
+	}
+}
