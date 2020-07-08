@@ -74,8 +74,10 @@ class Search extends PureComponent {
         items: results,
       });
     } catch (err) {
+      console.log(err)
       this.setState({
-        error: 'An error occurred with your search'
+        error: 'An error occurred with your search',
+        isSearching: false,
       });
     }
   }

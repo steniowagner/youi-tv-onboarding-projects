@@ -1,0 +1,10 @@
+# Some third party libraries requires assets to be extracted to files instead of being
+# read from the .apk package. Use this file to list files and directories that must be
+# extracted at runtime.
+
+# Examples:
+# third_party_config.properties
+# libraries/myLibraryDirectory
+# config/3rdpartylib.json
+
+cacert.pem
