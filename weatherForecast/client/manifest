@@ -1,0 +1,64 @@
+# Mandatory:
+#=========
+# Channel Details
+title=weatherForecast
+major_version=1
+minor_version=1
+build_version=1
+ 
+# Channel Assets, Splash / Loading Screen Artwork:
+#=================================================
+
+# HD 720p assets
+mm_icon_focus_hd=pkg:/images/mm_icon_focus_hd.jpg
+splash_screen_hd=pkg:/images/Splash_HD.png
+
+# Optional HD 1080p assets
+splash_screen_fhd=pkg:/images/Splash_FHD.png
+
+# SD 480p assets
+# Note: By specifying the HD 720p assets here, Roku will know to scale both the assets and the app
+#       This allows for universal scaling support
+mm_icon_focus_sd=pkg:/images/mm_icon_focus_hd.jpg
+splash_screen_sd=pkg:/images/Splash_HD.png
+
+## Optional
+#=========
+splash_color=#808080
+splash_min_time=0
+
+## Resolution
+#ui_resolutions=sd,hd,fhd
+
+#bs_libs_required=roku_ads_lib
+
+## See manifest params at https://sdkdocs.roku.com/display/sdkdoc/Roku+Channel+Manifest
+
+# start youi specific stuff
+
+host=hostAddress
+port=80
+sessionTimeoutSeconds=14400
+
+#DEBUG_PRINT_VIDEO_DRM: Print videoheader and drmparams to the Roku console.
+#bs_const=ENABLE_DEBUG_JSON=false;
+
+#secure=true
+#shared_secret=secret
+
+supports_input_launch=1
+
+background_color=0xDF1D46FF
+
+#analytics_providers=ConvivaAnalytics
+
+# Conviva configuration
+#conviva_gateway_url=
+#conviva_api_key=
+
+#ads_class=AuditudeAds
+## Roku's default App Id (if not working with Nielsen directly)
+#nielsen_application_id=
+
+## Roku SceneGraph version: 1.2 gains huge performance improvement.
+rsg_version=1.2
