@@ -1,6 +1,4 @@
 export default {
+  MAIN: 'MAIN',
   SPLASH: 'SPLASH',
-  LANDER: 'LANDER',
-  INFORMATION: 'INFORMATION',
-  ABOUT: 'ABOUT'
 };

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { getItemFromStorage, setItemOnStorage } from '../../../../utils/storage-manager';
 import CONSTANTS from '../../../../utils/constants';
+import ROUTES from '../../../../routes/route-names';
 
 const Wrapper = styled(View)`
   width: 100%;
@@ -30,6 +31,8 @@ class Splash extends Component {
   });
 
   async componentDidMount() {
+    const { navigation } = this.props;
+
     Animated.loop(
       Animated.timing(
         this.splinAnimatedValue,
@@ -37,30 +40,29 @@ class Splash extends Component {
          toValue: 1,
          duration: 7000,
          easing: Easing.linear,
-         useNativeDriver: true
+         useNativeDriver: true,
         }
       )
     ).start();
     
-    await this.handleLoadRegisteredCities();
+    await this.handleSetRegisteredCities();
+
+    /**
+      - Uncomment this and comment the next line if you want to see the animation!
+      setTimeout(() => {
+        navigation.navigate(ROUTES.MAIN);
+      }, 5000);
+    */
+
+    navigation.navigate(ROUTES.MAIN);
   }
 
-  handleLoadRegisteredCities = async () => {
-    const registeredCities = await this.getRegisteredCitiesList();
-
-    navigation.navigate('', {
-      registeredCities,
-    });
-  }
-
-  getRegisteredCitiesList = async () => {
+  handleSetRegisteredCities = async () => {
     const registeredCities = await getItemFromStorage(CONSTANTS.KEYS.APP_STORAGE_KEY, undefined);
 
     if (!registeredCities) {
       await setItemOnStorage(CONSTANTS.KEYS.APP_STORAGE_KEY, DEFAULT_CITIES);
     }
-
-    return registeredCities || DEFAULT_CITIES;
   }
 
   render() {

@@ -1,19 +1,19 @@
 import { createStackNavigator } from 'react-navigation';
 
 import defaultOptions from '../../../../routes/default-options';
-import Splash from '../components/Splash';
+import Lander from '../components/Lander';
 import ROUTE_NAMES from './route-names';
 
-const SplashStack = createStackNavigator(
+const LanderStack = createStackNavigator(
   {
-    [ROUTE_NAMES.SPLASH]: {
-      screen: Splash,
+    [ROUTE_NAMES.LANDER]: {
+      screen: Lander,
     }
   },
   {
     ...defaultOptions,
-    initialRouteName: ROUTE_NAMES.SPLASH,
+    initialRouteName: ROUTE_NAMES.LANDER,
   },
 );
 
-export default SplashStack;
+export default LanderStack;
