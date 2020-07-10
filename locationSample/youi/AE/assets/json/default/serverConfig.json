@@ -1,0 +1,11 @@
+{
+  "startImmediately" : false,
+  "serverVersionOverride": "",
+  "exportHandler" : {	
+    "exportAsJson" : true,
+    "exportStrategy" : {
+      "requiredStableThreshold" : 5,
+      "maxUnstableThreshold" : 10
+    }
+  }
+}
