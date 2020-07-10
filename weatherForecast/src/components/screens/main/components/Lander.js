@@ -6,9 +6,11 @@ import CONSTANTS from '../../../../utils/constants';
 
 class Lander extends Component {
   async componentDidMount() {
-    const registeredCities = await getItemFromStorage(CONSTANTS.KEYS.APP_STORAGE_KEY, undefined);
+    const registeredCities = await getItemFromStorage(CONSTANTS.KEYS.REGISTERED_CITIES_STORAGE_KEY, undefined);
+    const userLocationInfo = await getItemFromStorage(CONSTANTS.KEYS.USER_LOCATION_INFO_STORAGE_KEY, {});
 
-    console.log(registeredCities);
+    console.log('registeredCities: ', registeredCities);
+    console.log('userLocationInfo: ', userLocationInfo.city, userLocationInfo.state, userLocationInfo.country);
   }
 
   render() {

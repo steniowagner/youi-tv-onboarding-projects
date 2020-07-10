@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Easing, Animated, View } from 'react-native';
 import styled from 'styled-components';
 
-import { getItemFromStorage, setItemOnStorage } from '../../../../utils/storage-manager';
+import { removeItemFromStorage, getItemFromStorage, setItemOnStorage } from '../../../../utils/storage-manager';
+import { getUserLocationInfo } from '../../../../services';
 import CONSTANTS from '../../../../utils/constants';
 import ROUTES from '../../../../routes/route-names';
 
@@ -19,8 +20,6 @@ const SplashImage = styled(Animated.Image)`
   height: 180px;
   resize-mode: contain;
 `;
-
-const DEFAULT_CITIES = ['Ottawa, Canada', 'Los Angeles, California'];
 
 class Splash extends Component {
   splinAnimatedValue = new Animated.Value(0);
@@ -44,24 +43,40 @@ class Splash extends Component {
         }
       )
     ).start();
-    
-    await this.handleSetRegisteredCities();
 
-    /**
-      - Uncomment this and comment the next line if you want to see the animation!
-      setTimeout(() => {
-        navigation.navigate(ROUTES.MAIN);
-      }, 5000);
-    */
+    await removeItemFromStorage(CONSTANTS.KEYS.USER_LOCATION_INFO_STORAGE_KEY);
+
+    await removeItemFromStorage(CONSTANTS.KEYS.REGISTERED_CITIES_STORAGE_KEY);
+
+    await this.handleSyncStorageInfo();
 
     navigation.navigate(ROUTES.MAIN);
   }
 
+  handleSyncStorageInfo = async () => {
+    return Promise.all([
+      this.handleSetRegisteredCities(),
+      this.handleUserLocationInfo(),
+    ]);
+  }
+
+  handleUserLocationInfo = async () => {
+    // for simplicity, I'm not considering that the user could move to another location (in cases of mobile devices).
+
+    const userLocationInfoFromStorage = await getItemFromStorage(CONSTANTS.KEYS.USER_LOCATION_INFO_STORAGE_KEY, undefined);
+
+    if (!userLocationInfoFromStorage) {
+      const userLocationInfo = await getUserLocationInfo();
+
+      await setItemOnStorage(CONSTANTS.KEYS.USER_LOCATION_INFO_STORAGE_KEY, userLocationInfo);
+    }
+  }
+
   handleSetRegisteredCities = async () => {
-    const registeredCities = await getItemFromStorage(CONSTANTS.KEYS.APP_STORAGE_KEY, undefined);
+    const registeredCities = await getItemFromStorage(CONSTANTS.KEYS.REGISTERED_CITIES_STORAGE_KEY, undefined);
 
     if (!registeredCities) {
-      await setItemOnStorage(CONSTANTS.KEYS.APP_STORAGE_KEY, DEFAULT_CITIES);
+      await setItemOnStorage(CONSTANTS.KEYS.REGISTERED_CITIES_STORAGE_KEY, CONSTANTS.VALUES.DEFAULT_CITIES);
     }
   }
 
