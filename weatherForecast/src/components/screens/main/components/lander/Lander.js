@@ -12,17 +12,22 @@ const Wrapper = styled(View)`
 
 class Lander extends Component {
   state = {
-    shoudUpdateWeatherList: false,
+    shoudlRefreshWeatherList: false,
   };
   
   render() {
-    const { shoudUpdateWeatherList } = this.state;
+    const { shoudlRefreshWeatherList } = this.state;
 
     return (
       <>
         <Wrapper>
-          <Header />
-          <WeatherList />
+          <Header
+            onPressRefreshButton={() => this.setState({ shoudlRefreshWeatherList: true })}
+          />
+          <WeatherList
+            onRefreshWeatherData={() => this.setState({ shoudlRefreshWeatherList: false })}
+            shoudlRefreshWeatherList={shoudlRefreshWeatherList}
+          />
         </Wrapper>       
       </>
     );

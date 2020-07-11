@@ -35,6 +35,14 @@ class WeatherList extends PureComponent {
     await this.onStartGetWeatherRequest();
   }
 
+  async componentWillReceiveProps(nextProps) {
+    if (nextProps.shoudlRefreshWeatherList) {
+      await this.onStartGetWeatherRequest();
+
+      nextProps.onRefreshWeatherData();
+    }
+  }
+
   onStartGetWeatherRequest = async () => {
     this.setState({
       isLoading: true,

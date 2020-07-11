@@ -32,6 +32,8 @@ const AppTitleText = styled(Text)`
 
 class Header extends PureComponent {
   render() {
+    const { onPressRefreshButton } = this.props;
+
     return (
       <Wrapper>
         <AppIcon
@@ -43,7 +45,7 @@ class Header extends PureComponent {
         <ActionButtonsWrapper>
           <ActionButton
             iconName="sync-icon"
-            onPress={() => console.log('sync')}
+            onPress={onPressRefreshButton}
           />
           <ActionButton
             iconName="info-icon"
