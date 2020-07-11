@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { Image, Text, View } from 'react-native';
 import styled from 'styled-components';
 
@@ -30,31 +30,25 @@ const AppTitleText = styled(Text)`
   font-weight: bold;
 `;
 
-class Header extends PureComponent {
-  render() {
-    const { onPressRefreshButton } = this.props;
-
-    return (
-      <Wrapper>
-        <AppIcon
-          source={{
-            uri: 'res://drawable/default/app-icon.png'
-          }}
-        />
-        <AppTitleText>Weather Now</AppTitleText>
-        <ActionButtonsWrapper>
-          <ActionButton
-            iconName="sync-icon"
-            onPress={onPressRefreshButton}
-          />
-          <ActionButton
-            iconName="info-icon"
-            onPress={() => console.log('info')}
-          />
-        </ActionButtonsWrapper>
-      </Wrapper>
-    );
-  }
-}
+const Header = ({ onPressDeviceInfoButton, onPressRefreshButton }) => (
+  <Wrapper>
+    <AppIcon
+      source={{
+        uri: 'res://drawable/default/app-icon.png'
+      }}
+    />
+    <AppTitleText>Weather Now</AppTitleText>
+    <ActionButtonsWrapper>
+      <ActionButton
+        iconName="sync-icon"
+        onPress={onPressRefreshButton}
+      />
+      <ActionButton
+        iconName="info-icon"
+        onPress={onPressDeviceInfoButton}
+      />
+    </ActionButtonsWrapper>      
+  </Wrapper>
+);
 
 export default Header;
