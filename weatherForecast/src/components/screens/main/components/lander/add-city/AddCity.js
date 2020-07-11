@@ -2,8 +2,10 @@ import React, { PureComponent } from 'react';
 import { Text, View } from 'react-native';
 import styled from 'styled-components';
 
+import { getItemFromStorage, setItemOnStorage } from '../../../../../../utils/storage-manager';
 import { getWeatherByCityName } from '../../../../../../services';
 import ActionButton from '../../../../../common/ActionButton';
+import CONSTANTS from '../../../../../../utils/constants';
 import SearchStatus from './SearchStatus';
 import SearchInput from './SearchInput';
 
@@ -43,11 +45,15 @@ class AddCity extends PureComponent {
     cityName: '',
   };  
 
-  onFindCity = cityData => {
+  onFindCity = async cityData => {
     const { onAddNewCity } = this.props;
 
+    const currentCities = await getItemFromStorage(CONSTANTS.KEYS.REGISTERED_CITIES_STORAGE_KEY, []);
+
+    await setItemOnStorage(CONSTANTS.KEYS.REGISTERED_CITIES_STORAGE_KEY, [cityData.name, ...currentCities]);
+
     setTimeout(() => {
-      onAddNewCity(cityData);  
+      onAddNewCity();  
     }, 2000);
   };
 
@@ -81,7 +87,7 @@ class AddCity extends PureComponent {
         hasSuccess: true,
       });
 
-      this.onFindCity(result);
+      await this.onFindCity(result);
     } catch (err) {
       console.error(err);
     }

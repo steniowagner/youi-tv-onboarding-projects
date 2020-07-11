@@ -3,7 +3,7 @@ import { FlatList, Modal, View } from 'react-native';
 import styled from 'styled-components';
 
 import ActivityLoading from '../../../../../common/ActivityLoading';
-import SearchButton from '../../../../../common/ActionButton';
+import AddCityButton from '../../../../../common/ActionButton';
 import { getWeatherData } from '../../../../../../services';
 import WeatherListItem from './WeatherListItem';
 import AddCity from '../add-city/AddCity';
@@ -32,6 +32,14 @@ class WeatherList extends PureComponent {
   };
 
   async componentDidMount() {
+    await this.onStartGetWeatherRequest();
+  }
+
+  onStartGetWeatherRequest = async () => {
+    this.setState({
+      isLoading: true,
+    });
+
     const weatherList = await getWeatherData();
 
     this.setState({
@@ -40,8 +48,10 @@ class WeatherList extends PureComponent {
     });
   }
 
-  onAddNewCity = (cityData) => {
-    this.setState({ isSearchCityModalOpen: false })
+  onAddNewCity = async () => {
+    this.setState({ isAddCityModalOpen: false });
+
+    await this.onStartGetWeatherRequest();
   }
 
   render() {
@@ -58,7 +68,7 @@ class WeatherList extends PureComponent {
     return (
       <>
         <Wrapper>
-          <SearchButton
+          <AddCityButton
             onPress={() => this.setState({ isAddCityModalOpen: true })}
             iconName="plus-icon"
           />
@@ -103,17 +113,3 @@ class WeatherList extends PureComponent {
 }
 
 export default WeatherList;
-
-/**<WeatherListItem
-        temperature="30 C"
-        description="Party cloudy"
-        city="Fortaleza"
-        index={0}
-        icon="01d"
-      />
-      
-                    <SearchButton
-              onPress={() => this.setState({ isSearchCityModalOpen: true })}
-              iconName="plus-icon"
-            />
-      */
