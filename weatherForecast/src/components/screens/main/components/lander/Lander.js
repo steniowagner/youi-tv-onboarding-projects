@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Modal, View } from 'react-native';
+import { View } from 'react-native';
 import styled from 'styled-components';
 
-import SearchButton from '../../../../common/ActionButton';
-import AddCity from './add-city/AddCity'
+import WeatherList from './weather-list/WeatherList';
 import Header from './Header';
 
 const Wrapper = styled(View)`
@@ -11,44 +10,20 @@ const Wrapper = styled(View)`
   background-color: ${({ theme }) => theme.colors.secondary};
 `;
 
-const ContentWrapepr = styled(View)`
-  padding: 12px;
-`;
-
 class Lander extends Component {
   state = {
-    isSearchCityModalOpen: true,
+    shoudUpdateWeatherList: false,
   };
-
-  onAddNewCity = (cityData) => {
-    console.log('city-data: ', cityData);
-    this.setState({ isSearchCityModalOpen: false })
-  }
   
   render() {
-    const { isSearchCityModalOpen } = this.state;
+    const { shoudUpdateWeatherList } = this.state;
 
     return (
       <>
         <Wrapper>
           <Header />
-          <ContentWrapepr>
-            <SearchButton
-              onPress={() => this.setState({ isSearchCityModalOpen: true })}
-              iconName="plus-icon"
-            />
-          </ContentWrapepr>
-        </Wrapper>
-        <Modal
-          visible={isSearchCityModalOpen}
-          animationType="slide"
-          transparent={false}
-        >
-          <AddCity
-            onPressBack={() => this.setState({ isSearchCityModalOpen: false })}
-            onAddNewCity={this.onAddNewCity}
-          />
-        </Modal>
+          <WeatherList />
+        </Wrapper>       
       </>
     );
   }

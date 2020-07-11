@@ -22,7 +22,7 @@ const Wrapper = styled(View)`
   margin-vertical: 16px;
   border-radius: 4px;
   background-color: #fff;
-  border: 2px ${({ isFocused, theme }) => isFocused ? theme.colors.selected : 'transparent'} solid;
+  border: 3px ${({ isFocused, theme }) => isFocused ? theme.colors.selected : 'transparent'} solid;
 `;
 
 class SearchInput extends Component {
