@@ -2,9 +2,10 @@ import React from 'react';
 import { Image, Text, View } from 'react-native';
 import styled from 'styled-components';
 
-import ActionButton from '../../../../common/ActionButton';
+import ActionButton from './ActionButton';
 
 const Wrapper = styled(View)`
+  height: 64px;
   flex-direction: row;
   padding: 12px;
   justify-content: space-between;
@@ -12,11 +13,6 @@ const Wrapper = styled(View)`
   top: 0px;
   left: 0px;
   background-color: ${({ theme }) => theme.colors.main};
-`;
-
-const AppIcon = styled(Image)`
-  width: 48px;
-  height: 48px;
 `;
 
 const ActionButtonsWrapper = styled(View)`
@@ -30,14 +26,15 @@ const AppTitleText = styled(Text)`
   font-weight: bold;
 `;
 
-const Header = ({ onPressDeviceInfoButton, onPressRefreshButton }) => (
+const Header = ({
+  onPressDeviceInfoButton,
+  onPressRefreshButton,
+  LeftIcon,
+  title,
+}) => (
   <Wrapper>
-    <AppIcon
-      source={{
-        uri: 'res://drawable/default/app-icon.png'
-      }}
-    />
-    <AppTitleText>Weather Now</AppTitleText>
+    <LeftIcon />
+    <AppTitleText>{title}</AppTitleText>
     <ActionButtonsWrapper>
       <ActionButton
         iconName="sync-icon"

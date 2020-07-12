@@ -3,8 +3,8 @@ import { Animated, Easing } from 'react-native';
 import styled from 'styled-components';
 
 const LoadingImage = styled(Animated.Image)`
-  width: 20px;
-  height: 20px;
+  width: 36px;
+  height: 36px;
   resize-mode: contain;
 `;
 

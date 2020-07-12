@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import ActivityLoading from '../../../../../common/ActivityLoading';
 import AddCityButton from '../../../../../common/ActionButton';
 import { getWeatherData } from '../../../../../../services';
+import CONSTANTS from '../../../../../../utils/constants';
+import ROUTE_NAMES from '../../../routes/route-names';
 import WeatherListItem from './WeatherListItem';
 import AddCity from '../add-city/AddCity';
 
@@ -63,6 +65,7 @@ class WeatherList extends PureComponent {
 
   render() {
     const { isAddCityModalOpen, weatherList, isLoading } = this.state;
+    const { navigation } = this.props;
 
     if (isLoading) {
       return (
@@ -93,6 +96,9 @@ class WeatherList extends PureComponent {
             keyExtractor={({ id }) => `${id}`}
             renderItem={({ item, index }) => (
               <WeatherListItem
+                onPress={() => navigation.navigate(ROUTE_NAMES.INFORMATION, {
+                  [CONSTANTS.KEYS.CITY_DATA_INFORMATION_PARAM]: item,
+                })}
                 temperature={item.temperature}
                 description={item.description}
                 height={LIST_ITEM_HEIGHT}

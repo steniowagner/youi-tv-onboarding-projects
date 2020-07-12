@@ -47,6 +47,7 @@ class WeatherListItem extends PureComponent {
     const {
       temperature,
       description,
+      onPress,
       height,
       index,
       width,
@@ -62,6 +63,7 @@ class WeatherListItem extends PureComponent {
         onBlur={() => this.setState({ isFocused: false })}
         isFocused={isFocused}
         isFirst={index === 0}
+        onPress={onPress}
         height={height}
         width={width}
       >
