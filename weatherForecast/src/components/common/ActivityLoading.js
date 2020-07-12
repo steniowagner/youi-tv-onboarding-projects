@@ -1,45 +1,23 @@
-import React, { PureComponent, createRef } from 'react';
-import { Animated, Easing } from 'react-native';
+import React from 'react';
+import { Image } from 'react-native';
 import styled from 'styled-components';
 
-const LoadingImage = styled(Animated.Image)`
+import SpinComponent from './SpinComponent';
+
+const LoadingImage = styled(Image)`
   width: 36px;
   height: 36px;
   resize-mode: contain;
 `;
 
-class ActivityLoading extends PureComponent {
-  splinAnimatedValue = new Animated.Value(0);
-  
-  spinInterpolationValue = this.splinAnimatedValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0deg', '360deg']
-  });
-
-  componentDidMount() {
-    Animated.loop(
-      Animated.timing(
-        this.splinAnimatedValue,
-        {
-         toValue: 1,
-         duration: 2000,
-         easing: Easing.linear,
-         useNativeDriver: true,
-        }
-      )
-    ).start();
-  }
-
-  render() {
-    return (
-      <LoadingImage
-        style={{transform: [{ rotate: this.spinInterpolationValue }] }}
-        source={{
-          uri: 'res://drawable/default/loading-icon.png'
-        }}
-      />
-    );
-  }
-}
+const ActivityLoading = () => (
+  <SpinComponent>
+    <LoadingImage
+      source={{
+        uri: 'res://drawable/default/loading-icon.png'
+      }}
+    />
+  </SpinComponent>
+);
 
 export default ActivityLoading;

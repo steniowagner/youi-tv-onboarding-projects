@@ -17,11 +17,11 @@ const StatusMessageText = styled(Text)`
 `;
 
 const ActivityStatusWrapper = styled(View)`
-  width: 28px;
-  height: 28px;
+  width: 36px;
+  height: 36px;
   justify-content: center;
   align-items: center;
-  border-radius: 14px;
+  border-radius: 18px;
   background-color: ${({ theme, hasSuccess, hasError }) => {
     if (hasSuccess) {
       return theme.colors.success;

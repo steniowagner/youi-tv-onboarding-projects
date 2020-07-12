@@ -13,7 +13,7 @@ const routes = createSwitchNavigator({
     screen: MainRoutes
   },
 }, {
-  initialRouteName: ROUTE_NAMES.MAIN,
+  initialRouteName: ROUTE_NAMES.SPLASH,
 });
 
 export default routes;

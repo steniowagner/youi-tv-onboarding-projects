@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Easing, Animated, View } from 'react-native';
+import { Image, View } from 'react-native';
 import styled from 'styled-components';
 
-import { removeItemFromStorage, getItemFromStorage, setItemOnStorage } from '../../../../utils/storage-manager';
+import { getItemFromStorage, setItemOnStorage } from '../../../../utils/storage-manager';
 import { getUserLocationInfo } from '../../../../services';
+import SpinComponent from '../../../common/SpinComponent';
 import CONSTANTS from '../../../../utils/constants';
 import ROUTES from '../../../../routes/route-names';
 
@@ -15,38 +16,15 @@ const Wrapper = styled(View)`
   background-color: ${({ theme }) => theme.colors.secondary};
 `;
 
-const SplashImage = styled(Animated.Image)`
+const SplashImage = styled(Image)`
   width: 180px;
   height: 180px;
   resize-mode: contain;
 `;
 
 class Splash extends Component {
-  splinAnimatedValue = new Animated.Value(0);
-  
-  spinInterpolationValue = this.splinAnimatedValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0deg', '360deg']
-  });
-
   async componentDidMount() {
     const { navigation } = this.props;
-
-    Animated.loop(
-      Animated.timing(
-        this.splinAnimatedValue,
-        {
-         toValue: 1,
-         duration: 7000,
-         easing: Easing.linear,
-         useNativeDriver: true,
-        }
-      )
-    ).start();
-
-    await removeItemFromStorage(CONSTANTS.KEYS.USER_LOCATION_INFO_STORAGE_KEY);
-
-    await removeItemFromStorage(CONSTANTS.KEYS.REGISTERED_CITIES_STORAGE_KEY);
 
     await this.handleSyncStorageInfo();
 
@@ -83,12 +61,13 @@ class Splash extends Component {
   render() {
     return (
       <Wrapper>
-        <SplashImage
-          style={{transform: [{ rotate: this.spinInterpolationValue }] }}
-          source={{
-            uri: 'res://drawable/default/splash.png'
-          }}
-        />
+        <SpinComponent>
+          <SplashImage
+            source={{
+              uri: 'res://drawable/default/splash.png'
+            }}
+          />
+        </SpinComponent>
       </Wrapper>
     );
   }
