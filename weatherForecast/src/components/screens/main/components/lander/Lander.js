@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Modal, Image, View } from 'react-native';
 import styled from 'styled-components';
 
+import AboutDeviceInfo from '../../../../common/AboutDeviceInfo';
 import WeatherList from './weather-list/WeatherList';
-import AboutDeviceInfo from './AboutDeviceInfo';
 import Header from '../../../../common/Header';
 
 const Wrapper = styled(View)`

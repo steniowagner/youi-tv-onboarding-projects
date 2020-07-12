@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, Modal, View } from 'react-native';
 import styled from 'styled-components';
 
 import WeatherInfoList from './weather-info-list/WeatherInfoList';
+import AboutDeviceInfo from '../../../../common/AboutDeviceInfo';
 import ActivityLoading from '../../../../common/ActivityLoading';
 import {getWeekForecastByCityId} from '../../../../../services';
 import ActionButton from '../../../../common/ActionButton';
@@ -23,6 +24,7 @@ const LoadingWrapper = styled(View)`
 
 class Information extends Component {
   state = {
+    isAboutDeviceModalOpen: false,
     weatherForecastWeek: [],
     isLoading: false,
   }
@@ -48,8 +50,8 @@ class Information extends Component {
   };
 
   render() {
+    const { isAboutDeviceModalOpen, weatherForecastWeek, isLoading } = this.state;
     const { params } = this.props.navigation.state;
-    const { weatherForecastWeek, isLoading } = this.state;
 
     if (isLoading) {
       return (
@@ -64,9 +66,9 @@ class Information extends Component {
     return (
       <Wrapper>
         <Header
-          onPressDeviceInfoButton={() => {}}
-          onPressRefreshButton={this.getWeekForecasData}
+          onPressDeviceInfoButton={() => this.setState({ isAboutDeviceModalOpen: true })}
           title={params[CONSTANTS.KEYS.CITY_DATA_INFORMATION_PARAM].city}
+          onPressRefreshButton={this.getWeekForecasData}
           LeftIcon={() => (
             <ActionButton
               onPress={() => this.props.navigation.goBack()}
@@ -83,6 +85,15 @@ class Information extends Component {
             />
           ))}
         </ScrollView>
+        <Modal
+          visible={isAboutDeviceModalOpen}
+          animationType="slide"
+          transparent={false}
+        >
+          <AboutDeviceInfo
+            onPressBackButton={() => this.setState({ isAboutDeviceModalOpen: false })}
+          />
+        </Modal>
       </Wrapper>
     );
   }

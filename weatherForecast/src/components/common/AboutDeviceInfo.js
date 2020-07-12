@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 import { DeviceInfo } from '@youi/react-native-youi';
 import styled from 'styled-components';
 
-import BackButton from '../../../../common/ActionButton';
+import BackButton from './ActionButton';
 
 const CardContentWrapper = styled(View)`
   padding: 16px;
