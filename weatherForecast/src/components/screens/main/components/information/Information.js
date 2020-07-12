@@ -24,7 +24,7 @@ const LoadingWrapper = styled(View)`
 class Information extends Component {
   state = {
     weatherForecastWeek: [],
-    isLoading: true,
+    isLoading: false,
   }
 
   async componentDidMount() {
@@ -34,6 +34,10 @@ class Information extends Component {
   getWeekForecasData = async () => {
     const { params } = this.props.navigation.state;
     const { id } = params[CONSTANTS.KEYS.CITY_DATA_INFORMATION_PARAM];
+
+    this.setState({
+      isLoading: true,
+    });
 
     const weatherForecastWeek = await getWeekForecastByCityId(id);
 
@@ -61,7 +65,7 @@ class Information extends Component {
       <Wrapper>
         <Header
           onPressDeviceInfoButton={() => {}}
-          onPressRefreshButton={() => {}}
+          onPressRefreshButton={this.getWeekForecasData}
           title={params[CONSTANTS.KEYS.CITY_DATA_INFORMATION_PARAM].city}
           LeftIcon={() => (
             <ActionButton
