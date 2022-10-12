@@ -15,7 +15,7 @@
     "@wdio/mocha-framework": "^5.16.5",
     "@wdio/spec-reporter": "^5.16.5",
     "@wdio/sync": "^5.16.5",
-    "appium": "^1.15.0",
+    "appium": "^1.22.3",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.26.0",
